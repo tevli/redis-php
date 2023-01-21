@@ -11,7 +11,7 @@ socket_bind($sock, "localhost", 6379);
 socket_listen($sock, 5);
 $accept = socket_accept($sock); // Wait for first client
 
-$clients[] = array($sock);
+$clients = array($sock);
 
 while(true) {
  $response = "+PONG\r\n";
