@@ -13,7 +13,7 @@ $accept = socket_accept($sock); // Wait for first client
 
 while(true) {
  $buf = socket_read($accept, 2048, PHP_NORMAL_READ);
- $response = "+PONG";
+ $response = "+PONG\r\n";
  socket_write($accept, $response, strlen($response));
 }
 
