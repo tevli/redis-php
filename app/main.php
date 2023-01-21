@@ -12,10 +12,9 @@ socket_listen($sock, 5);
 $accept = socket_accept($sock); // Wait for first client
 
 while(true) {
- while(socket_read($accept, 2048 )) {
-  $response = "+PONG\r\n";
-  socket_write($accept, $response, strlen($response));
- }
+ socket_read($accept, 2048 );
+ $response = "+PONG\r\n";
+ socket_write($accept, $response, strlen($response));
 }
 
 socket_close($accept);
