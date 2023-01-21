@@ -14,10 +14,17 @@ $accept = socket_accept($sock); // Wait for first client
 $clients[] = array($sock);
 
 while(true) {
- socket_read($accept, 2048 );
  $response = "+PONG\r\n";
+
+ if(socket_select($clients,$write,$e,0)<1) continue;
+    if (in_array($sock, $clients)) {
+         $clients[] = $client = socket_accept($sock);
+         $key = array_search($sock, $clients);
+         unset($clients[$key]);
+   }
  foreach($clients as $client) {
   var_dump($client);
+  socket_read($client,2048);
   socket_write($accept, $response, strlen($response));
  }
 }
