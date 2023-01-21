@@ -18,5 +18,4 @@ $accept = socket_accept($sock); // Wait for first client
  }
 
 socket_close($accept);
-
 ?>
