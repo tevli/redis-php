@@ -15,15 +15,14 @@ $accept = socket_accept($sock); // Wait for first client
   $buf = socket_read($accept, 2048, PHP_NORMAL_READ);
   $response = "+PONG\r\n";
   if(!empty($buf)){
-   $response = $buf;
+   $response = $buf.'lol';
 
    if(strpos($response,'ping')){
     $response = str_replace('ping','PONG',$response);
    }
    if(strpos($response,'*')){
     $pos = strpos($response,'*');
-    $pos2 = $pos+1;
-    $response = substr($response,$pos2);
+    $response = substr($response,$pos+1);
 
    }
 
