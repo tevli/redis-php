@@ -17,7 +17,7 @@ while(true) {
  socket_read($accept, 2048 );
  $response = "+PONG\r\n";
  foreach($clients as $client) {
-  echo $client;
+  var_dump($client);
   socket_write($accept, $response, strlen($response));
  }
 }
