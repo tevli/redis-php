@@ -16,17 +16,18 @@ $clients = array($sock);
 while(true) {
  $response = "+PONG\r\n";
 
- if(socket_select($clients,$write,$e,0)<1) continue;
-    if (in_array($sock, $clients)) {
+ $read =  $clients;
+ if(socket_select($read,$write,$e,0)<1) continue;
+    if (in_array($sock, $read)) {
          $clients[] = $client = socket_accept($sock);
          $key = array_search($sock, $clients);
-         unset($clients[$key]);
+         unset($read[$key]);
    }
- foreach($clients as $client) {
-  var_dump($client);
-  socket_read($client,2048);
-  socket_write($accept, $response, strlen($response));
- }
+  foreach($read as $r) {
+   var_dump($r);
+   socket_read($r,2048);
+   socket_write($r, $response, strlen($response));
+  }
 }
 
 socket_close($accept);
