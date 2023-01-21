@@ -9,13 +9,14 @@ echo "Logs from your program will appear here";
  socket_set_option($sock, SOL_SOCKET, SO_REUSEPORT, 1);
  socket_bind($sock, "localhost", 6379);
  socket_listen($sock, 5);
- $accept = socket_accept($sock); // Wait for first client
 
-$buf = socket_read($accept, 2048, PHP_NORMAL_READ);
-$response = "+PONG\r\n";
-socket_write($accept, $response, strlen($response));
+ while(true) {
+  $accept = socket_accept($sock); // Wait for first client
+
+  $buf = socket_read($accept, 2048, PHP_NORMAL_READ);
+  $response = "+PONG\r\n";
+  socket_write($accept, $response, strlen($response));
+ }
 
 socket_close($accept);
-
- socket_close($sock);
 ?>
