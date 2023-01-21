@@ -11,10 +11,15 @@ socket_bind($sock, "localhost", 6379);
 socket_listen($sock, 5);
 $accept = socket_accept($sock); // Wait for first client
 
+$clients = [];
+
 while(true) {
- socket_read($accept, 2048 );
+ $clients[] = socket_read($accept, 2048 );
  $response = "+PONG\r\n";
- socket_write($accept, $response, strlen($response));
+ foreach($clients as $client) {
+  socket_write($accept, $response, strlen($response));
+ }
+
 }
 
 socket_close($accept);
