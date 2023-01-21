@@ -14,17 +14,9 @@ $accept = socket_accept($sock); // Wait for first client
  while(true) {
   $buf = socket_read($accept, 2048, PHP_NORMAL_READ);
   $response = "+PONG\r\n";
-//  if(!empty($buf)){
-//   $response = buildResponse($buf);
-//  }
   socket_write($accept, $response, strlen($response));
  }
 
 socket_close($accept);
 
-
-// function buildResponse(string $buf): string
-// {
-//  return "+PONG\r\n";
-// }
 ?>
