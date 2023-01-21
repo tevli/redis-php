@@ -11,14 +11,13 @@ socket_bind($sock, "localhost", 6379);
 socket_listen($sock, 5);
 $accept = socket_accept($sock); // Wait for first client
 
-$clients[] = $accept;
+$clients[] = array($sock);
 
 while(true) {
  socket_read($accept, 2048 );
  $response = "+PONG\r\n";
  foreach($clients as $client) {
   echo $client;
-  socket_read($accept, 2048 );
   socket_write($accept, $response, strlen($response));
  }
 }
