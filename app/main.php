@@ -16,6 +16,17 @@ $accept = socket_accept($sock); // Wait for first client
   $response = "+PONG\r\n";
   if(!empty($buf)){
    $response = $buf;
+
+   if(strpos($response,'ping')){
+    $response = str_replace('ping','PONG',$response);
+   }
+   if(strpos($response,'*')){
+    $pos = strpos($response,'*');
+    $pos2 = $pos+1;
+    $response = substr($response,$pos2);
+
+   }
+
   }
   socket_write($accept, $response, strlen($response));
  }
