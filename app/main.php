@@ -15,21 +15,11 @@ $clients = array($sock);
 
 while(true) {
  socket_read($accept, 2048 );
- $response = "PONG\r\n";
-// foreach($clients as $client) {
-//  socket_write($accept, $response, strlen($response));
-// }
-     $read = $clients;
-     if (socket_select($read, $write, $e, 0) < 1) continue;
-    if (in_array($sock, $read)) {
-          $clients[] = $client = socket_accept($sock);
-          $key = array_search($sock, $read);
-          unset($read[$key]);
-    }
-    foreach ($read as $readSock) {
-          $data = socket_read($readSock, 2048);
-          socket_write($readSock, "PONG\r\n");
-      }
+ $response = "+PONG\r\n";
+ foreach($clients as $client) {
+  socket_write($accept, $response, strlen($response));
+ }
+
 
 }
 
