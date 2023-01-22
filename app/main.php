@@ -30,7 +30,7 @@ socket_close($accept);
 
 function _echo($message){
     if(strpos($message,'ECHO')==0){
-        return str_replace('echo',,'',$message);
+        return str_replace('echo','',$message);
     }
     return "+PONG\r\n";
 }
