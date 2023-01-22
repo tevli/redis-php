@@ -11,7 +11,7 @@ socket_listen($sock, 5);
 $clients = array($sock);
 
 while(true) {
- $response = "+PONG\r\n";
+// $response = "+PONG\r\n";
 
  $read =  $clients;
  if(socket_select($read,$write,$e,0)<1) continue;
@@ -21,10 +21,17 @@ while(true) {
          unset($read[$key]);
    }
   foreach($read as $r) {
-   socket_read($r,2048);
-   socket_write($r, $response, strlen($response));
+   $message = socket_read($r,2048);
+   socket_write($r, _echo($message), strlen(_echo($message)));
   }
 }
 
 socket_close($accept);
+
+function _echo($message){
+    if(strpos($message,'ECHO')==0){
+        return str_replace('echo',,'',$message);
+    }
+    return "+PONG\r\n";
+}
 ?>
