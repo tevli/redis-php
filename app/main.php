@@ -31,7 +31,10 @@ function _echo($message): string
 {
     if(!empty($message)) {
         if (strpos($message, 'echo') == 0) {
-            return trim(preg_replace('/[^A-Za-z0-9\-]/', '', $message));
+            $val = trim(preg_replace('/[^A-Za-z\-]/', '', $message));
+            if($val!='ping'){
+                return $val;
+            }
         }
     }
     return "+PONG\r\n";
