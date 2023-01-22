@@ -21,7 +21,7 @@ while(true) {
    }
   foreach($read as $r) {
    $message = @socket_read($r,2048);
-   @socket_write($r, _echo($message), strlen(_echo($message)));
+   socket_write($r, _echo($message), strlen(_echo($message)));
   }
 }
 
