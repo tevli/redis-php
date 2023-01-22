@@ -11,7 +11,6 @@ socket_listen($sock, 5);
 $clients = array($sock);
 
 while(true) {
-// $response = "+PONG\r\n";
 
  $read =  $clients;
  if(socket_select($read,$write,$e,0)<1) continue;
@@ -29,9 +28,9 @@ while(true) {
 socket_close($accept);
 
 function _echo($message){
-    if(strpos($message,'ECHO')==0){
-        return str_replace('echo','',$message);
-    }
+//    if(strpos($message,'ECHO')==0){
+//        return str_replace('echo','',$message);
+//    }
     return "+PONG\r\n";
 }
 ?>
