@@ -44,7 +44,7 @@ function _resp_format($value,$num=0){
     $length = strlen($value);
     $retval = '';
     if($num==0){
-        $retval .='*';
+        $retval .='+';
     }
     else{
         $retval.='$';
@@ -53,7 +53,8 @@ function _resp_format($value,$num=0){
         //if value is more than one, we can use recursion, hence the $num=0;
         $num=1;
     }
-    $retval .= $length.'\r\n'.$value;
+//    $retval .= $length.'\r\n'.$value;
+    $retval.=$value."\r\n";
 
 
     return $retval;
