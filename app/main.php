@@ -33,7 +33,7 @@ function _echo($message): string
 
             $val = trim(preg_replace('/[^A-Za-z\-]/', '', $message));
             if($val!='ping'){
-                return str_replace('echo','',$val).'\r\n';
+                return str_replace('echo','',$val);
             }
 
     }
