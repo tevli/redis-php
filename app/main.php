@@ -20,8 +20,8 @@ while(true) {
          unset($read[$key]);
    }
   foreach($read as $r) {
-   $message = socket_read($r,2048);
-   socket_write($r, _echo($message), strlen(_echo($message)));
+   $message = @socket_read($r,2048);
+   @socket_write($r, _echo($message), strlen(_echo($message)));
   }
 }
 
@@ -30,12 +30,12 @@ socket_close($accept);
 function _echo($message): string
 {
     if(!empty($message)) {
-        if (strpos($message, 'echo') == 0) {
+
             $val = trim(preg_replace('/[^A-Za-z\-]/', '', $message));
             if($val!='ping'){
                 return $val;
             }
-        }
+
     }
     return "+PONG\r\n";
 }
