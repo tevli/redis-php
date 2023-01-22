@@ -31,7 +31,7 @@ function _echo($message): string
 {
     if(!empty($message)) {
         if (strpos($message, 'echo') == 0) {
-            return "-PONG\r\n";
+            return $message;
         }
     }
     return "+PONG\r\n";
