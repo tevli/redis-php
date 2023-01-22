@@ -33,10 +33,29 @@ function _echo($message): string
 
             $val = trim(preg_replace('/[^A-Za-z\-]/', '', $message));
             if($val!='ping'){
-                return str_replace('echo','',$val);
+                return _resp_format(str_replace('echo','',$val));
             }
 
     }
     return "+PONG\r\n";
+}
+
+function _resp_format($value,$num=0){
+    $length = strlen($value);
+    $retval = '';
+    if($num==0){
+        $retval .='*';
+    }
+    else{
+        $retval.='$';
+    }
+    if(strpos($value,' ')){
+        //if value is more than one, we can use recursion, hence the $num=0;
+        $num=1;
+    }
+    $retval .= $length.'\r\n'.$value;
+
+
+    return $retval;
 }
 ?>
