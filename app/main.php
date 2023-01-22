@@ -31,7 +31,7 @@ function _echo($message): string
 {
     if(!empty($message)) {
         if (strpos($message, 'echo') == 0) {
-            return $message;
+            return trim(preg_replace('/[^A-Za-z0-9\-]/', '', $message));
         }
     }
     return "+PONG\r\n";
