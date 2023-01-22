@@ -27,10 +27,11 @@ while(true) {
 
 socket_close($accept);
 
-function _echo($message){
+function _echo($message): string
+{
     if(!empty($message)) {
         if (strpos($message, 'echo') == 0) {
-            return str_replace('echo ', '', $message);
+            return "-PONG\r\n";
         }
     }
     return "+PONG\r\n";
