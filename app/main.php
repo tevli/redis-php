@@ -21,7 +21,7 @@ while(true) {
    }
   foreach($read as $r) {
    $message = @socket_read($r,2048);
-   socket_write($r, _echo($message), strlen(_echo($message)));
+   @socket_write($r, _echo($message), strlen(_echo($message)));
   }
 }
 
@@ -31,7 +31,7 @@ function _echo($message): string
 {
     if(!empty($message)) {
 
-            $val = trim(preg_replace('/[^A-Za-z\-]/', '', $message));
+            $val = preg_replace('/[^A-Za-z\-]/', '', $message);
             if($val!='ping'){
                 return _resp_format(str_replace('echo','',$val));
             }
