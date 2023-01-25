@@ -34,7 +34,7 @@ function _handle($message,$values=[]): string
     if(!empty($message)) {
             //try to split message to determine if set or get.
             $spl = explode(' ',$message);
-            if(!empty($spl[1])){
+            if(!empty($spl[0])){
                 switch (strtolower($spl[0])){
                     case 'set':
                         $values[$spl[1]] = $spl[2];
@@ -53,7 +53,7 @@ function _handle($message,$values=[]): string
             }
 
     }
-    return _resp_format('PONGXXX');
+    return _resp_format('PONG');
 }
 
 function _resp_format($value,$num=0){
