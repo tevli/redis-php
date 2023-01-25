@@ -87,6 +87,6 @@ function _clean($message){
         $message = str_replace($sacred_word,'',$message);
     }
     var_dump('message at this second point is '.$message);
-    return $message;
+    return preg_replace('/[^A-Za-z\-]/', '', $message);
 }
 ?>
