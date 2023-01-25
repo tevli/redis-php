@@ -111,9 +111,15 @@ function _serialize($message){
        $words = str_replace("\r\n",' ',$words);
 
        //iterate over words now.
+    $main_words = '';
     for ($e=0;$e<strlen($words);$e++){
-        if($words[$e]==' '&&$words[$e-1]==' '){
-            unset($words[$e-1]);
+        if($words[$e]==' ') {
+            if ($words[$e - 1] != ' ') {
+                $main_words .= $words[$e];
+            }
+        }
+        else{
+            $main_words .=$words[$e];
         }
     }
 
