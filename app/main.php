@@ -49,6 +49,9 @@ function _handle($message,$values=[]): string
                 }
             }
             else{
+                if(strpos($message,'echo')){
+                    return _resp_format($message);
+                }
                 return _resp_format('PONG');
             }
 
@@ -57,6 +60,7 @@ function _handle($message,$values=[]): string
 }
 
 function _resp_format($value,$num=0){
+    $value = _clean($value);
     $length = strlen($value);
     $retval = '';
     if($num==0){
@@ -69,10 +73,17 @@ function _resp_format($value,$num=0){
         //if value is more than one, we can use recursion, hence the $num=0;
         $num=1;
     }
-//    $retval .= $length.'\r\n'.$value;
     $retval.=$value."\r\n";
 
 
     return $retval;
+}
+
+function _clean($message){
+    $sacred_words = ['echo','get','set','ping'];
+    foreach($sacred_words as $sacred_word){
+        $message = str_replace($sacred_word,'',$message);
+    }
+    return $message;
 }
 ?>
