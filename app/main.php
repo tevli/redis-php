@@ -108,6 +108,14 @@ function _serialize($message){
                }
            }
        }
+       $words = str_replace("\r\n",' ',$words);
+
+       //iterate over words now.
+    for ($e=0;$e<strlen($words);$e++){
+        if($words[$e]==' '&&$words[$e-1]==' '){
+            $words[$e-1] = '';
+        }
+    }
 
        var_dump("words here is $words");
        return $words;
