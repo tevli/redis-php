@@ -32,7 +32,7 @@ socket_close($accept);
 function _handle($message,$values=[]): string
 {
     if(!empty($message)) {
-            $message = preg_replace('/[^A-Za-z0-9\-]/', ' ', $message);
+            $message = preg_replace('/[^A-Za-z0-9\-]/', '', $message);
             var_dump('1-message is '.$message);
             //try to split message to determine if set or get.
             $spl = explode(' ',$message);
