@@ -41,10 +41,7 @@ function _echo($message,$values=[]): string
                     case 'get':
                         return _resp_format($values[$spl[1]]);
                     case 'echo':
-//                        $val = preg_replace('/[^A-Za-z\-]/', '', $message);
-//                        if($val!='ping'){
                             return _resp_format($spl[1]);
-//                        }
                     default:
                         return _resp_format('PONG');
 
