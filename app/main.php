@@ -22,13 +22,14 @@ while(true) {
    }
   foreach($read as $r) {
    $message = @socket_read($r,2048);
-   @socket_write($r, _echo($message,$values), strlen(_echo($message)));
+   $response = _handle($message,$values);
+   @socket_write($r, $response, strlen($response));
   }
 }
 
 socket_close($accept);
 
-function _echo($message,$values=[]): string
+function _handle($message,$values=[]): string
 {
     if(!empty($message)) {
             //try to split message to determine if set or get.
@@ -44,7 +45,6 @@ function _echo($message,$values=[]): string
                             return _resp_format($spl[1]);
                     default:
                         return _resp_format('PONG');
-
 
                 }
 
