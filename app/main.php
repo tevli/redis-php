@@ -11,6 +11,7 @@ socket_listen($sock, 5);
 $clients = array($sock);
 
 while(true) {
+    $values = [];
 
  $read =  $clients;
  if(socket_select($read,$write,$e,0)<1) continue;
@@ -21,26 +22,24 @@ while(true) {
    }
   foreach($read as $r) {
    $message = @socket_read($r,2048);
-   @socket_write($r, _echo($message), strlen(_echo($message)));
+   @socket_write($r, _echo($message,$values), strlen(_echo($message)));
   }
 }
 
 socket_close($accept);
 
-function _echo($message): string
+function _echo($message,$values=[]): string
 {
     if(!empty($message)) {
-
-        $values = [];
             //try to split message to determine if set or get.
-            $spl = explode($message);
-            if(!empty($spl[3])){
-                switch (strtolower($spl[1])){
+            $spl = explode(' ',$message);
+            if(!empty($spl[1])){
+                switch (strtolower($spl[0])){
                     case 'set':
-                        $values[$spl[2]] = $spl[3];
+                        $values[$spl[1]] = $spl[2];
                         return _resp_format('OK');
                     case 'get':
-                        return _resp_format($values[$spl[2]]);
+                        return _resp_format($values[$spl[1]]);
 
                 }
 
