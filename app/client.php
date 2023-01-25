@@ -5,7 +5,7 @@
 
 $host    = "localhost";
 $port    = 6379;
-$message = "echo hi";
+$message = "echo world";
 echo "Message To server : ".$message."\n";
 // create socket
 $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket\n");
