@@ -49,7 +49,7 @@ function _handle($message,$values=[]): string
                 }
             }
             else{
-                return _resp_format('NIL');
+                return _resp_format('PONG');
             }
 
     }
