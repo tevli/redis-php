@@ -33,7 +33,7 @@ function _handle($message,$values=[]): string
 {
     if(!empty($message)) {
         var_dump('1-message is '.$message);
-            $message = _serialize($message);
+            $message = _unserialize($message);
 
             var_dump('2-message is '.$message);
             //try to split message to determine if set or get.
@@ -46,6 +46,8 @@ function _handle($message,$values=[]): string
                         $values[$spl[1]] = $spl[2];
                         return _resp_format('OK');
                     case 'get':
+                        var_dump('we are now in the gettting  ');
+                        print_r($values);
                         return _resp_format($values[$spl[1]]);
                     case 'echo':
                             return _resp_format($spl[1]);
@@ -96,7 +98,7 @@ function _clean($message){
     return preg_replace('/[^A-Za-z\-]/', '', $message);
 }
 
-function _serialize($message){
+function _unserialize($message){
 
     $words = '';
     $forbidden = ['*','$'];
@@ -123,7 +125,7 @@ function _serialize($message){
         }
     }
 
-       var_dump("main_words here is $main_words");
+       var_dump("main_words here is=>$main_words");
        return $main_words;
 //    $message = preg_replace('/[^A-Za-z0-9\-]/', '', $message);
 }
