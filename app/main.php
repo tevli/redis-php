@@ -42,7 +42,7 @@ function _handle($message,$values=[]): string
                     case 'get':
                         return _resp_format($values[$spl[1]]);
                     case 'echo':
-                            return _resp_format('test');
+                            return _resp_format($spl[1]);
                     default:
                         return _resp_format('PONG');
 
@@ -53,7 +53,7 @@ function _handle($message,$values=[]): string
             }
 
     }
-    return _resp_format('PONG');
+    return _resp_format('PONGXXX');
 }
 
 function _resp_format($value,$num=0){
