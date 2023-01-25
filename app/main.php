@@ -40,17 +40,22 @@ function _echo($message,$values=[]): string
                         return _resp_format('OK');
                     case 'get':
                         return _resp_format($values[$spl[1]]);
+                    case 'echo':
+//                        $val = preg_replace('/[^A-Za-z\-]/', '', $message);
+//                        if($val!='ping'){
+                            return _resp_format($spl[1]);
+//                        }
+                    default:
+                        return _resp_format('PONG');
+
 
                 }
 
             }
-            $val = preg_replace('/[^A-Za-z\-]/', '', $message);
-            if($val!='ping'){
-                return _resp_format(str_replace('echo','',$val));
-            }
+
 
     }
-    return "+PONG\r\n";
+    return _resp_format('PONG');
 }
 
 function _resp_format($value,$num=0){
