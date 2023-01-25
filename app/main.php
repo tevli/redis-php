@@ -47,12 +47,13 @@ function _handle($message,$values=[]): string
                         return _resp_format('PONG');
 
                 }
-
+            }
+            else{
+                return _resp_format('NIL');
             }
 
-
     }
-    return _resp_format($message??'PONG');
+    return _resp_format('PONG');
 }
 
 function _resp_format($value,$num=0){
