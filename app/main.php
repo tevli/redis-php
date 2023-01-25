@@ -22,15 +22,12 @@ while(true) {
    }
   foreach($read as $r) {
    $message = @socket_read($r,2048);
-   var_dump('values here is ');
-   print_r($values);
-
    $response = _handle($message,$values);
    @socket_write($r, $response, strlen($response));
   }
 }
 
-socket_close($accept);
+//socket_close($accept);
 
 function _handle($message,$values=[]): string
 {
