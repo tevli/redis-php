@@ -34,6 +34,8 @@ function _handle($message,$values=[]): string
     if(!empty($message)) {
             //try to split message to determine if set or get.
             $spl = explode(' ',$message);
+            var_dump('spl[0] is '.$spl[0]);
+            var_dump('spl[1] is '.$spl[1]);
             if(!empty($spl[1])){
                 switch (strtolower($spl[0])){
                     case 'set':
