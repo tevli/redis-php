@@ -9,10 +9,9 @@ socket_bind($sock, "localhost", 6379);
 socket_listen($sock, 5);
 
 $clients = array($sock);
-$values = [];
 
 while(true) {
-
+  $values = [];
  $read =  $clients;
  if(socket_select($read,$write,$e,0)<1) continue;
     if (in_array($sock, $read)) {
@@ -27,9 +26,9 @@ while(true) {
   }
 }
 
-//socket_close($accept);
+socket_close($accept);
 
-function _handle($message,$values=[]): string
+function _handle($message,&$values=[]): string
 {
     if(!empty($message)) {
         var_dump('1-message is '.$message);
