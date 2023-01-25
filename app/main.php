@@ -31,6 +31,20 @@ function _echo($message): string
 {
     if(!empty($message)) {
 
+        $values = [];
+            //try to split message to determine if set or get.
+            $spl = explode($message);
+            if(!empty($spl[3])){
+                switch (strtolower($spl[1])){
+                    case 'set':
+                        $values[$spl[2]] = $spl[3];
+                        return _resp_format('OK');
+                    case 'get':
+                        return _resp_format($values[$spl[2]]);
+
+                }
+
+            }
             $val = preg_replace('/[^A-Za-z\-]/', '', $message);
             if($val!='ping'){
                 return _resp_format(str_replace('echo','',$val));
