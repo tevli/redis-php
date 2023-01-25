@@ -5,7 +5,7 @@
 
 $host    = "localhost";
 $port    = 6379;
-$message = "*3 $3set $5pears $5pears";
+$message = "get 1";
 
 echo "Message To server : ".$message."\n";
 // create socket
