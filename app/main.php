@@ -50,7 +50,7 @@ function _handle($message,&$values=[]): string
                     case 'get':
                         var_dump('we are now in the gettting  ');
                         print_r($values);
-                        return _resp_format($values[$spl[1]]??$spl[1]);
+                        return _resp_format($values[$spl[1]]);
                     case 'echo':
                             return _resp_format($spl[1]);
                     default:
