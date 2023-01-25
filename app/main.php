@@ -34,7 +34,7 @@ function _handle($message,$values=[]): string
     if(!empty($message)) {
             //try to split message to determine if set or get.
             $spl = explode(' ',$message);
-            if(!empty($spl[0])){
+            if(!empty($spl[1])){
                 switch (strtolower($spl[0])){
                     case 'set':
                         $values[$spl[1]] = $spl[2];
@@ -74,6 +74,7 @@ function _resp_format($value,$num=0){
         $num=1;
     }
     $retval.=$value."\r\n";
+    var_dump('retval at this point is '.$retval);
 
 
     return $retval;
@@ -85,6 +86,7 @@ function _clean($message){
     foreach($sacred_words as $sacred_word){
         $message = str_replace($sacred_word,'',$message);
     }
+    var_dump('message at this second point is '.$message);
     return $message;
 }
 ?>
