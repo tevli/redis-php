@@ -9,9 +9,9 @@ socket_bind($sock, "localhost", 6379);
 socket_listen($sock, 5);
 
 $clients = array($sock);
+$values = [];
 
 while(true) {
-    $values = [];
 
  $read =  $clients;
  if(socket_select($read,$write,$e,0)<1) continue;
