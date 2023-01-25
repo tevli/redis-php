@@ -8,8 +8,6 @@ socket_set_option($sock, SOL_SOCKET, SO_REUSEPORT, 1);
 socket_bind($sock, "localhost", 6379);
 socket_listen($sock, 5);
 
-$shm = shm_attach('3','50000');
-
 $clients = array($sock);
 
 $values = [];
@@ -24,14 +22,14 @@ while(true) {
    }
   foreach($read as $r) {
    $message = @socket_read($r,2048);
-   $response = _handle($message,$shm);
+   $response = _handle($message,$values);
    @socket_write($r, $response, strlen($response));
   }
 }
 
 socket_close($accept);
 
-function _handle($message,$shm): string
+function _handle($message,&$values=[]): string
 {
     if(!empty($message)) {
         var_dump('1-message is '.$message);
@@ -45,16 +43,14 @@ function _handle($message,$shm): string
             if(!empty($spl[1])){
                 switch (strtolower($spl[0])){
                     case 'set':
-//                        $values[$spl[1]] = $spl[2];
-                        shm_put_var($shm,1,$spl[2]);
+                        $values[$spl[1]] = $spl[2];
                         var_dump('setting   ');
-//                        print_r($values);
+                        print_r($values);
                         return _resp_format('OK');
                     case 'get':
                         var_dump('we are now in the gettting  ');
-//                        print_r($values);
-                        $v = shm_get_var($shm,1);
-                        return _resp_format($v??'OK');
+                        print_r($values);
+                        return _resp_format($values[$spl[1]]??$spl[1]);
                     case 'echo':
                             return _resp_format($spl[1]);
                     default:
