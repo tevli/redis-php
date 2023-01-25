@@ -109,7 +109,7 @@ function _serialize($message){
            }
        }
 
-       var_dump('words here is '.$words);
+       var_dump("words here is $words");
        return $words;
 //    $message = preg_replace('/[^A-Za-z0-9\-]/', '', $message);
 }
