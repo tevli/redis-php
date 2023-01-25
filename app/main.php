@@ -102,7 +102,7 @@ function _serialize($message){
 
        for ($i=0;$i<strlen($message);$i++){
            if(!is_numeric($message[$i])){
-               if(!strpos($message[$i],'*')||!strpos($message[$i],'$')){
+               if((!strpos($message[$i],'*'))&&(!strpos($message[$i],'$'))){
                    $words.=$message[$i];
                }
            }
