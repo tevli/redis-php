@@ -80,7 +80,7 @@ function _resp_format($value,$num=0){
 }
 
 function _clean($message){
-    $sacred_words = ['echo','get','set','ping'];
+    $sacred_words = ['echo'];
     foreach($sacred_words as $sacred_word){
         $message = str_replace($sacred_word,'',$message);
     }
