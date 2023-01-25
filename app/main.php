@@ -44,7 +44,7 @@ function _handle($message,$values=[]): string
                     case 'echo':
                             return _resp_format($spl[1]);
                     default:
-                        return _resp_format('PONG');
+                        return _resp_format('PONG67');
 
                 }
             }
