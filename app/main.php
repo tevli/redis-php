@@ -52,7 +52,7 @@ function _handle($message,$values=[]): string
 
 
     }
-    return _resp_format('PONG');
+    return _resp_format($message??'PONG');
 }
 
 function _resp_format($value,$num=0){
