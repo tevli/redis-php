@@ -44,6 +44,8 @@ function _handle($message,$values=[]): string
                 switch (strtolower($spl[0])){
                     case 'set':
                         $values[$spl[1]] = $spl[2];
+                        var_dump('setting   ');
+                        print_r($values);
                         return _resp_format('OK');
                     case 'get':
                         var_dump('we are now in the gettting  ');
