@@ -113,7 +113,7 @@ function _serialize($message){
        //iterate over words now.
     for ($e=0;$e<strlen($words);$e++){
         if($words[$e]==' '&&$words[$e-1]==' '){
-            $words[$e-1] = '';
+            unset($words[$e-1]);
         }
     }
 
