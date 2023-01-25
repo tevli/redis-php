@@ -42,9 +42,9 @@ function _handle($message,$values=[]): string
                     case 'get':
                         return _resp_format($values[$spl[1]]);
                     case 'echo':
-                            return _resp_format($spl[1]);
+                            return _resp_format('test');
                     default:
-                        return _resp_format('PONG67');
+                        return _resp_format('PONG');
 
                 }
             }
