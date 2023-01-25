@@ -33,7 +33,7 @@ function _handle($message,$values=[]): string
 {
     if(!empty($message)) {
         var_dump('1-message is '.$message);
-            $message = preg_replace('/[^A-Za-z0-9\-]/', '', $message);
+            $message = _serialize($message);
 
             var_dump('2-message is '.$message);
             //try to split message to determine if set or get.
@@ -94,5 +94,22 @@ function _clean($message){
     }
     var_dump('message at this second point is '.$message);
     return preg_replace('/[^A-Za-z\-]/', '', $message);
+}
+
+function _serialize($message){
+
+    $words = '';
+
+       for ($i=0;$i<strlen($message);$i++){
+           if(!is_numeric($message[$i])){
+               if(!strpos($message[$i],'*')||!strpos($message[$i],'$')){
+                   $words.=$message[$i];
+               }
+           }
+       }
+
+       var_dump('words here is '.$words);
+       return $words;
+//    $message = preg_replace('/[^A-Za-z0-9\-]/', '', $message);
 }
 ?>
