@@ -97,7 +97,7 @@ function _resp_format($value,$num=0){
     }
     if(empty($value)){
         //empty array RESP string, bypass and return early.
-        return "*0\r\n";
+        return "0\r\n";
     }
     $length = strlen($value);
     $retval = '';
