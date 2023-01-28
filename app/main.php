@@ -43,14 +43,26 @@ function _handle($message,&$values=[]): string
             if(!empty($spl[1])){
                 switch (strtolower($spl[0])){
                     case 'set':
-                        $values[$spl[1]] = $spl[2];
+                        if(!empty($spl[3])&&(strtolower($spl[3])=='px')){
+                            //the message comes with an expiry date.
+                            $values[$spl[1]['exp']] = is_numeric($spl[4]) ? $spl[4] : 0;
+                            $values[$spl[1]['exp_time']] = microtime();
+                        }
+                        $values[$spl[1]['value']] = $spl[2];
                         var_dump('setting   ');
                         print_r($values);
                         return _resp_format('OK');
                     case 'get':
                         var_dump('we are now in the gettting  ');
                         print_r($values);
-                        return _resp_format($values[$spl[1]]??$spl[1]);
+                        if(isset($spl[1]['exp_time'])){
+                            $exp_time = $spl[1]['exp_time'];
+                            $exp = $spl[1]['exp'];
+                            if((microtime() - $exp_time)>$exp){
+                                return _resp_format(0);
+                            }
+                        }
+                        return _resp_format($values[$spl[1]['value']]??$spl[1]);
                     case 'echo':
                             return _resp_format($spl[1]);
                     default:
