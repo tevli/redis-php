@@ -49,7 +49,7 @@ function _handle($message,&$values=[]): string
                             var_dump('spl[4] is '.$spl[4]);
                             //the message comes with an expiry date.
                             $values[$spl[1]]['exp'] = is_numeric($spl[4]) ? $spl[4] : 0;
-                            $values[$spl[1]]['exp_time'] = microtime();
+                            $values[$spl[1]]['exp_time'] = time();
                         }
                         $values[$spl[1]]['value'] = $spl[2];
                         var_dump('setting   ');
@@ -61,7 +61,7 @@ function _handle($message,&$values=[]): string
                         if(isset($values[$spl[1]]['exp_time'])){
                             $exp_time = $values[$spl[1]]['exp_time'];
                             $exp = $values[$spl[1]]['exp'];
-                            print_r(['microtime'=>microtime(),'exp_time'=>$exp_time,'diff'=>(microtime() - $exp_time)]);
+                            print_r(['microtime'=>time(),'exp_time'=>$exp_time,'diff'=>(time() - $exp_time)]);
                             if((microtime() - $exp_time)>$exp){
                                 return _resp_format(0);
                             }
