@@ -48,25 +48,25 @@ function _handle($message,&$values=[]): string
                             var_dump('spl[3] is '.$spl[3]);
                             var_dump('spl[4] is '.$spl[4]);
                             //the message comes with an expiry date.
-                            $values[$spl[1]['exp']] = is_numeric($spl[4]) ? $spl[4] : 0;
-                            $values[$spl[1]['exp_time']] = microtime();
+                            $values[$spl[1]]['exp'] = is_numeric($spl[4]) ? $spl[4] : 0;
+                            $values[$spl[1]]['exp_time'] = microtime();
                         }
-                        $values[$spl[1]['value']] = $spl[2];
+                        $values[$spl[1]]['value'] = $spl[2];
                         var_dump('setting   ');
                         print_r($values);
                         return _resp_format('OK');
                     case 'get':
                         var_dump('we are now in the gettting  ');
                         print_r($values);
-                        if(isset($values[$spl[1]['exp_time']])){
-                            $exp_time = $values[$spl[1]['exp_time']];
-                            $exp = $values[$spl[1]['exp']];
+                        if(isset($values[$spl[1]]['exp_time'])){
+                            $exp_time = $values[$spl[1]]['exp_time'];
+                            $exp = $values[$spl[1]]['exp'];
                             print_r(['microtime'=>microtime(),'exp_time'=>$exp_time]);
                             if((microtime() - $exp_time)>$exp){
                                 return _resp_format(0);
                             }
                         }
-                        return _resp_format($values[$spl[1]['value']]??$spl[1]);
+                        return _resp_format($values[$spl[1]]['value']??$spl[1]);
                     case 'echo':
                             return _resp_format($spl[1]);
                     default:
