@@ -129,7 +129,7 @@ function _unserialize($message){
                }
            }
            else{
-               if(!in_array($forbidden,$message[$i-1])){
+               if(!in_array($message[$i-1],$forbidden)){
                    //check if predecessor is a forbidden word.
                    $words.=$message[$i];
                }
