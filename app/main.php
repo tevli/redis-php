@@ -63,7 +63,7 @@ function _handle($message,&$values=[]): string
                             $exp = $values[$spl[1]]['exp'];
                             print_r(['time'=>milliseconds(),'exp_time'=>$exp_time,'diff'=>(milliseconds() - $exp_time),'exp'=>$exp]);
                             if((milliseconds() - $exp_time)>=$exp){
-                                return _resp_format("-1");
+                                return _resp_format(NULL);
                             }
                         }
                         return _resp_format($values[$spl[1]]['value']??$spl[1]);
@@ -91,6 +91,14 @@ function _resp_format($value,$num=0){
         $value = _clean($value);
     }
     var_dump('value after _clean =>'.$value);
+    if(is_null($value)){
+        //null value, so bypass other procedures and return early.
+        return "$-1\r\n";
+    }
+    if(empty($value)){
+        //empty array RESP string, bypass and return early.
+        return "*0\r\n";
+    }
     $length = strlen($value);
     $retval = '';
     if($num==0){
