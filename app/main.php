@@ -56,7 +56,7 @@ function _handle($message,&$values=[]): string
                         print_r($values);
                         return _resp_format('OK');
                     case 'get':
-                        var_dump('we are now in the gettting  ');
+                        var_dump('we are now in the getting  ');
                         print_r($values);
                         if(isset($values[$spl[1]]['exp_time'])){
                             $exp_time = $values[$spl[1]]['exp_time'];
@@ -125,6 +125,12 @@ function _unserialize($message){
        for ($i=0;$i<strlen($message);$i++){
            if(!is_numeric($message[$i])){
                if(!in_array($message[$i],$forbidden)){
+                   $words.=$message[$i];
+               }
+           }
+           else{
+               if(!in_array($forbidden,$message[$i-1])){
+                   //check if predecessor is a forbidden word.
                    $words.=$message[$i];
                }
            }
