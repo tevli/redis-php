@@ -87,7 +87,7 @@ function _handle($message,&$values=[]): string
 
 function _resp_format($value,$num=0){
     var_dump('value before _clean =>'.$value);
-    if(!is_numeric($value)) {
+    if((!is_numeric($value))&&(!is_null($value))) {
         $value = _clean($value);
     }
     var_dump('value after _clean =>'.$value);
