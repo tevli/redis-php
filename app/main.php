@@ -61,7 +61,7 @@ function _handle($message,&$values=[]): string
                         if(isset($values[$spl[1]]['exp_time'])){
                             $exp_time = $values[$spl[1]]['exp_time'];
                             $exp = $values[$spl[1]]['exp'];
-                            print_r(['microtime'=>time(),'exp_time'=>$exp_time,'diff'=>(time() - $exp_time)]);
+                            print_r(['time'=>time(),'exp_time'=>$exp_time,'diff'=>(time() - $exp_time),'exp'=>$exp]);
                             if((microtime() - $exp_time)>$exp){
                                 return _resp_format(0);
                             }
