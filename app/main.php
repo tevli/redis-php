@@ -40,12 +40,13 @@ function _handle($message,&$values=[]): string
             $spl = explode(' ',$message);
             var_dump('spl[0] is '.$spl[0]);
             var_dump('spl[1] is '.$spl[1]);
+            var_dump('spl[2] is '.$spl[2]);
             if(!empty($spl[1])){
                 switch (strtolower($spl[0])){
                     case 'set':
-                        if(!empty($spl[3])&&(strtolower($spl[3])=='px')){
+                        if(!empty($spl[2])&&(strtolower($spl[2])=='px')){
                             //the message comes with an expiry date.
-                            $values[$spl[1]['exp']] = is_numeric($spl[4]) ? $spl[4] : 0;
+                            $values[$spl[1]['exp']] = is_numeric($spl[3]) ? $spl[3] : 0;
                             $values[$spl[1]['exp_time']] = microtime();
                         }
                         $values[$spl[1]['value']] = $spl[2];
