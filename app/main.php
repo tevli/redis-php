@@ -137,7 +137,7 @@ function _unserialize($message){
        }
        $words = str_replace("\r\n",' ',$words);
 
-       //iterate over words now.
+    //iterate over words to remove double and triple paddings.
     $main_words = '';
     for ($e=0;$e<strlen($words);$e++){
         if($words[$e]==' ') {
