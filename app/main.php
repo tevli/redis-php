@@ -118,6 +118,7 @@ function _clean($message){
 
 function _unserialize($message){
 
+    var_dump('message passed to _unserialize is =>'.$message);
     $words = '';
     $forbidden = ['*','$'];
 
