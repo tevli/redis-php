@@ -58,9 +58,10 @@ function _handle($message,&$values=[]): string
                     case 'get':
                         var_dump('we are now in the gettting  ');
                         print_r($values);
-                        if(isset($spl[1]['exp_time'])){
-                            $exp_time = $spl[1]['exp_time'];
-                            $exp = $spl[1]['exp'];
+                        if(isset($values[$spl[1]['exp_time']])){
+                            $exp_time = $values[$spl[1]['exp_time']];
+                            $exp = $values[$spl[1]['exp']];
+                            print_r(['microtime'=>microtime(),'exp_time'=>$exp_time]);
                             if((microtime() - $exp_time)>$exp){
                                 return _resp_format(0);
                             }
